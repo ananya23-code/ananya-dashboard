@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ananya | Projects Dashboard</title>
 <!-- Ananya Dashboard Homepage -->
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
@@ -170,9 +171,7 @@ h1 {
   margin-bottom: 25px;
 }
 
-.section-heading h2 {
-  font-size: 28px;
-}
+.section-heading h2 { font-size: 28px; }
 
 .section-heading p {
   color: #a8b3ce;
@@ -339,6 +338,11 @@ h1 {
   transform: translate(4px, -3px);
 }
 
+.project-card:focus-visible {
+  outline: 2px solid #c4b5fd;
+  outline-offset: 4px;
+}
+
 .empty {
   display: none;
   grid-column: 1 / -1;
@@ -426,6 +430,7 @@ footer {
 </head>
 
 <body>
+
 <nav class="navbar">
   <a href="#" class="logo">Ananya<span>.</span></a>
   <div class="nav-links">
@@ -436,6 +441,7 @@ footer {
 </nav>
 
 <main class="container">
+
   <section class="hero">
     <div class="eyebrow">
       <span class="dot"></span>
@@ -523,7 +529,7 @@ footer {
 
       <!-- 03 Personal Portfolio -->
       <a class="project-card"
-        href="portfolio/index.html"
+         href="portfolio/index.html"
          data-category="web" style="--glow:#a78bfa">
         <div class="card-top">
           <div class="project-icon">👩🏻‍💻</div>
@@ -557,7 +563,7 @@ footer {
 
       <!-- 05 News -->
       <a class="project-card"
-        href="news/index.html"
+         href="news/index.html"
          data-category="web" style="--glow:#38bdf8">
         <div class="card-top">
           <div class="project-icon">📰</div>
@@ -574,7 +580,9 @@ footer {
 
       <!-- 06 Student Profile -->
       <a class="project-card"
-         href="http://localhost:5173/"
+         href="https://ananya23-code.github.io/student-profile/"
+         target="_blank"
+         rel="noopener noreferrer"
          data-category="app" style="--glow:#34d399">
         <div class="card-top">
           <div class="project-icon">🎓</div>
@@ -592,6 +600,7 @@ footer {
       <div class="empty" id="empty">
         No projects found. Try another search.
       </div>
+
     </div>
   </section>
 
@@ -603,6 +612,7 @@ footer {
     </p>
     <a href="#projects">Explore My Projects ↑</a>
   </section>
+
 </main>
 
 <footer>
@@ -622,12 +632,17 @@ function updateProjects() {
   let count = 0;
 
   cards.forEach(card => {
-    const matchesSearch = card.textContent.toLowerCase().includes(query);
+    const matchesSearch =
+      card.textContent.toLowerCase().includes(query);
+
     const matchesFilter =
-      activeFilter === "all" || card.dataset.category === activeFilter;
+      activeFilter === "all" ||
+      card.dataset.category === activeFilter;
+
     const visible = matchesSearch && matchesFilter;
 
     card.style.display = visible ? "flex" : "none";
+
     if (visible) count++;
   });
 
@@ -639,11 +654,16 @@ search.addEventListener("input", updateProjects);
 filters.forEach(button => {
   button.addEventListener("click", () => {
     activeFilter = button.dataset.filter;
+
     filters.forEach(item => item.classList.remove("active"));
     button.classList.add("active");
+
     updateProjects();
   });
 });
 </script>
+
 </body>
 </html>
+
+
