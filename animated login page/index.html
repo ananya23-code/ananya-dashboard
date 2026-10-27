@@ -1,0 +1,525 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Login & Registration</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #10102b, #24245c, #6c35a5);
+            background-size: 200% 200%;
+            animation: gradientMove 8s ease infinite;
+            padding: 20px;
+        }
+
+        /* Animated background circles */
+        .circle {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(2px);
+            opacity: 0.5;
+            animation: float 7s ease-in-out infinite;
+        }
+
+        .circle.one {
+            width: 250px;
+            height: 250px;
+            background: #ff65c3;
+            top: -70px;
+            left: -60px;
+        }
+
+        .circle.two {
+            width: 200px;
+            height: 200px;
+            background: #52d9ff;
+            bottom: -60px;
+            right: -30px;
+            animation-delay: 2s;
+        }
+
+        .container {
+            width: 850px;
+            max-width: 100%;
+            min-height: 520px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            animation: appear 1s ease;
+        }
+
+        .form-box {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            padding: 45px 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: transform 0.7s ease, opacity 0.5s ease;
+        }
+
+        .login {
+            left: 0;
+            z-index: 2;
+            opacity: 1;
+        }
+
+        .register {
+            left: 0;
+            z-index: 1;
+            opacity: 0;
+            transform: translateX(100%);
+        }
+
+        .container.active .login {
+            transform: translateX(100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .container.active .register {
+            transform: translateX(100%);
+            opacity: 1;
+            z-index: 3;
+        }
+
+        h1 {
+            color: white;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #ddd8f5;
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .input-box {
+            margin-bottom: 18px;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            outline: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.12);
+            color: white;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .input-box input::placeholder {
+            color: #ded9f0;
+        }
+
+        .input-box input:focus {
+            border-color: #ff8bd5;
+            box-shadow: 0 0 12px rgba(255, 139, 213, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: white;
+            margin-bottom: 22px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        a {
+            color: #ffb5e4;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: white;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #ff65c3, #9b6bff);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 101, 195, 0.35);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .switch-text {
+            color: white;
+            text-align: center;
+            font-size: 13px;
+            margin-top: 22px;
+        }
+
+        /* Sliding welcome panel */
+        .welcome-panel {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 35px;
+            color: white;
+            background: linear-gradient(145deg, #a64dff, #ff65b8);
+            transition: transform 0.7s ease;
+            z-index: 5;
+        }
+
+        .container.active .welcome-panel {
+            transform: translateX(-100%);
+        }
+
+        .welcome-content {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .welcome-content h2 {
+            font-size: 34px;
+            margin-bottom: 18px;
+        }
+
+        .welcome-content p {
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+
+        .outline-btn {
+            padding: 12px 30px;
+            border: 2px solid white;
+            border-radius: 30px;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .outline-btn:hover {
+            background: white;
+            color: #9845d9;
+            transform: scale(1.05);
+        }
+
+        /* CSS keyframes */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-18px);
+            }
+        }
+
+        @keyframes gradientMove {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile layout */
+        @media (max-width: 650px) {
+            body {
+                padding: 12px;
+                overflow-y: auto;
+            }
+
+            .container {
+                min-height: 590px;
+            }
+
+            .form-box {
+                width: 100%;
+                height: 72%;
+                padding: 28px;
+                top: 28%;
+            }
+
+            .login {
+                left: 0;
+            }
+
+            .register {
+                left: 0;
+                transform: translateX(100%);
+            }
+
+            .container.active .login {
+                transform: translateX(-100%);
+            }
+
+            .container.active .register {
+                transform: translateX(0);
+            }
+
+            .welcome-panel {
+                left: 0;
+                width: 100%;
+                height: 28%;
+                padding: 15px;
+                transform: none;
+            }
+
+            .container.active .welcome-panel {
+                transform: none;
+            }
+
+            .welcome-content h2 {
+                font-size: 24px;
+                margin-bottom: 5px;
+            }
+
+            .welcome-content p {
+                font-size: 12px;
+                margin-bottom: 10px;
+            }
+
+            .outline-btn {
+                padding: 8px 20px;
+            }
+
+            h1 {
+                font-size: 27px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="circle one"></div>
+    <div class="circle two"></div>
+
+    <div class="container" id="container">
+
+        <!-- Login Form -->
+        <div class="form-box login">
+            <form id="loginForm">
+                <h1>Welcome Back!</h1>
+                <p class="subtitle">Login to continue your journey.</p>
+
+                <div class="input-box">
+                    <input type="email" placeholder="Email Address"
+                           aria-label="Email address" required>
+                </div>
+
+                <div class="input-box">
+                    <input type="password" placeholder="Password"
+                           aria-label="Password" required>
+                </div>
+
+                <div class="options">
+                    <label>
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="#" id="forgotLink">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn">Login</button>
+
+                <p class="switch-text">
+                    Don't have an account?
+                    <a href="#" class="register-link">Register</a>
+                </p>
+            </form>
+        </div>
+
+        <!-- Registration Form -->
+        <div class="form-box register">
+            <form id="registerForm">
+                <h1>Create Account</h1>
+                <p class="subtitle">Join us and get started today.</p>
+
+                <div class="input-box">
+                    <input type="text" placeholder="Full Name"
+                           aria-label="Full name" required>
+                </div>
+
+                <div class="input-box">
+                    <input type="email" placeholder="Email Address"
+                           aria-label="Email address" required>
+                </div>
+
+                <div class="input-box">
+                    <input type="password" placeholder="Create Password"
+                           aria-label="Create password" minlength="8" required>
+                </div>
+
+                <div class="input-box">
+                    <input type="password" placeholder="Confirm Password"
+                           aria-label="Confirm password" minlength="8" required>
+                </div>
+
+                <button type="submit" class="btn">Register</button>
+
+                <p class="switch-text">
+                    Already have an account?
+                    <a href="#" class="login-link">Login</a>
+                </p>
+            </form>
+        </div>
+
+        <!-- Animated Welcome Panel -->
+        <div class="welcome-panel">
+            <div class="welcome-content">
+                <h2 id="welcomeTitle">Hello, Friend!</h2>
+                <p id="welcomeMessage">
+                    Enter your personal details and start your journey with us.
+                </p>
+                <button class="outline-btn" id="switchButton">
+                    Register Now
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const container = document.getElementById("container");
+        const switchButton = document.getElementById("switchButton");
+        const welcomeTitle = document.getElementById("welcomeTitle");
+        const welcomeMessage = document.getElementById("welcomeMessage");
+
+        function showRegister() {
+            container.classList.add("active");
+            welcomeTitle.textContent = "Welcome Back!";
+            welcomeMessage.textContent =
+                "Already a member? Login and continue your journey.";
+            switchButton.textContent = "Login Now";
+        }
+
+        function showLogin() {
+            container.classList.remove("active");
+            welcomeTitle.textContent = "Hello, Friend!";
+            welcomeMessage.textContent =
+                "Enter your personal details and start your journey with us.";
+            switchButton.textContent = "Register Now";
+        }
+
+        switchButton.addEventListener("click", function () {
+            if (container.classList.contains("active")) {
+                showLogin();
+            } else {
+                showRegister();
+            }
+        });
+
+        document.querySelectorAll(".register-link").forEach(link => {
+            link.addEventListener("click", function (event) {
+                event.preventDefault();
+                showRegister();
+            });
+        });
+
+        document.querySelectorAll(".login-link").forEach(link => {
+            link.addEventListener("click", function (event) {
+                event.preventDefault();
+                showLogin();
+            });
+        });
+
+        document.getElementById("loginForm").addEventListener(
+            "submit", function (event) {
+                event.preventDefault();
+                alert("Login form submitted! Connect a backend to authenticate users.");
+            }
+        );
+
+        document.getElementById("registerForm").addEventListener(
+            "submit", function (event) {
+                event.preventDefault();
+
+                const inputs = this.querySelectorAll("input");
+                const password = inputs[2].value;
+                const confirmPassword = inputs[3].value;
+
+                if (password !== confirmPassword) {
+                    alert("Passwords do not match!");
+                    return;
+                }
+
+                alert("Registration form submitted! Connect a backend to save your account.");
+            }
+        );
+
+        document.getElementById("forgotLink").addEventListener(
+            "click", function (event) {
+                event.preventDefault();
+                alert("Please connect a password reset feature to continue.");
+            }
+        );
+    </script>
+
+</body>
+</html>

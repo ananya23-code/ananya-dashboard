@@ -1,0 +1,1069 @@
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   BODY - NEWSPAPER IMAGE BACKGROUND
+========================================= */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #222;
+
+    /* Newspaper image background */
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.65),
+            rgba(255, 255, 255, 0.65)
+        ),
+        url("ac967bd8-2959-40dd-a7ec-7c53af39d996.png");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+    min-height: 100vh;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+header {
+    background: #17212b;
+    color: white;
+
+    padding: 20px 7%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: relative;
+    z-index: 10;
+
+    border-bottom: 4px solid #c62828;
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.logo {
+    font-family: Georgia, serif;
+
+    font-size: 30px;
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   NAVIGATION - FLEXBOX
+========================================= */
+
+nav {
+    display: flex;
+    align-items: center;
+
+    gap: 25px;
+}
+
+nav a {
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #ffca28;
+}
+
+
+/* =========================================
+   BREAKING NEWS
+========================================= */
+
+.breaking-news {
+    background: #c62828;
+    color: white;
+
+    padding: 12px 7%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 5;
+
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.breaking-news strong {
+    background: white;
+    color: #c62828;
+
+    padding: 5px 10px;
+
+    border-radius: 3px;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   NEWS CONTAINER - CSS GRID
+========================================= */
+
+.news-container {
+    width: 86%;
+    max-width: 1200px;
+
+    margin: 35px auto;
+
+    display: grid;
+
+    grid-template-columns:
+        2fr
+        1fr
+        1fr;
+
+    gap: 22px;
+}
+
+
+/* =========================================
+   MAIN NEWS
+========================================= */
+
+.main-news {
+    grid-column: span 2;
+
+    height: 390px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 8px;
+
+    background: #111;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================
+   MAIN IMAGE
+========================================= */
+
+.main-news img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.5s ease;
+}
+
+
+/* IMAGE ZOOM */
+
+.main-news:hover img {
+    transform: scale(1.06);
+}
+
+
+/* =========================================
+   MAIN NEWS OVERLAY
+========================================= */
+
+.main-overlay {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+
+    padding: 35px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(0, 0, 0, 0.9)
+        );
+
+    z-index: 2;
+}
+
+
+/* =========================================
+   TOP STORY TAG
+========================================= */
+
+.tag {
+    display: inline-block;
+
+    background: #c62828;
+    color: white;
+
+    padding: 6px 12px;
+
+    border-radius: 3px;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   MAIN HEADING
+========================================= */
+
+.main-overlay h1 {
+    font-family: Georgia, serif;
+
+    font-size: 36px;
+
+    margin: 12px 0;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================
+   MAIN DESCRIPTION
+========================================= */
+
+.main-overlay p {
+    font-size: 16px;
+
+    line-height: 1.5;
+
+    margin-bottom: 10px;
+}
+
+
+/* =========================================
+   NEWS CARDS
+========================================= */
+
+.news-card {
+    background: rgba(255, 253, 247, 0.95);
+
+    border: 1px solid #ddd6c8;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.12);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* CARD HOVER */
+
+.news-card:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================
+   CARD IMAGE
+========================================= */
+
+.news-card img {
+    width: 100%;
+
+    height: 180px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* =========================================
+   CARD CONTENT
+========================================= */
+
+.news-content {
+    padding: 20px;
+}
+
+
+/* =========================================
+   CATEGORY
+========================================= */
+
+.category {
+    color: #c62828;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   CARD TITLE
+========================================= */
+
+.news-content h2 {
+    font-family: Georgia, serif;
+
+    font-size: 20px;
+
+    margin: 10px 0;
+
+    line-height: 1.3;
+}
+
+
+/* =========================================
+   CARD DESCRIPTION
+========================================= */
+
+.news-content p {
+    color: #666;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================
+   DATE
+========================================= */
+
+.news-content small {
+    color: #888;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    background: #17212b;
+
+    color: #f5f1e8;
+
+    text-align: center;
+
+    padding: 30px;
+
+    margin-top: 45px;
+
+    border-top: 4px solid #c62828;
+}
+
+.footer-content h2 {
+    margin-bottom: 10px;
+}
+
+.footer-content p {
+    margin: 8px 0;
+
+    color: #cbd5e1;
+}
+
+
+/* =========================================
+   TABLET RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .news-container {
+        grid-template-columns:
+            1fr
+            1fr;
+    }
+
+    .main-news {
+        grid-column: span 2;
+    }
+}
+
+
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+
+    /* HEADER */
+
+    header {
+        flex-direction: column;
+
+        gap: 15px;
+
+        padding: 20px;
+    }
+
+
+    /* LOGO */
+
+    .logo {
+        font-size: 25px;
+    }
+
+
+    /* NAVIGATION */
+
+    nav {
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        gap: 12px;
+    }
+
+    nav a {
+        font-size: 13px;
+    }
+
+
+    /* BREAKING NEWS */
+
+    .breaking-news {
+        flex-direction: column;
+
+        gap: 8px;
+
+        text-align: center;
+
+        padding: 12px;
+    }
+
+
+    /* ONE COLUMN */
+
+    .news-container {
+        width: 92%;
+
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+
+    /* MAIN NEWS */
+
+    .main-news {
+        grid-column: span 1;
+
+        height: 350px;
+    }
+
+
+    .main-overlay {
+        padding: 20px;
+    }
+
+
+    .main-overlay h1 {
+        font-size: 26px;
+    }
+
+
+    .main-overlay p {
+        font-size: 14px;
+    }
+
+
+    /* CARD IMAGE */
+
+    .news-card img {
+        height: 200px;
+    }
+
+
+    /* CARD TITLE */
+
+    .news-content h2 {
+        font-size: 19px;
+    }
+}
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   BODY - NEWSPAPER IMAGE BACKGROUND
+========================================= */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #222;
+
+    /* Newspaper image background */
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.65),
+            rgba(255, 255, 255, 0.65)
+        ),
+        url("ac967bd8-2959-40dd-a7ec-7c53af39d996.png");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+    min-height: 100vh;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+header {
+    background: #17212b;
+    color: white;
+
+    padding: 20px 7%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: relative;
+    z-index: 10;
+
+    border-bottom: 4px solid #c62828;
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.logo {
+    font-family: Georgia, serif;
+
+    font-size: 30px;
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   NAVIGATION - FLEXBOX
+========================================= */
+
+nav {
+    display: flex;
+    align-items: center;
+
+    gap: 25px;
+}
+
+nav a {
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #ffca28;
+}
+
+
+/* =========================================
+   BREAKING NEWS
+========================================= */
+
+.breaking-news {
+    background: #c62828;
+    color: white;
+
+    padding: 12px 7%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 5;
+
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.breaking-news strong {
+    background: white;
+    color: #c62828;
+
+    padding: 5px 10px;
+
+    border-radius: 3px;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   NEWS CONTAINER - CSS GRID
+========================================= */
+
+.news-container {
+    width: 86%;
+    max-width: 1200px;
+
+    margin: 35px auto;
+
+    display: grid;
+
+    grid-template-columns:
+        2fr
+        1fr
+        1fr;
+
+    gap: 22px;
+}
+
+
+/* =========================================
+   MAIN NEWS
+========================================= */
+
+.main-news {
+    grid-column: span 2;
+
+    height: 390px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 8px;
+
+    background: #111;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================
+   MAIN IMAGE
+========================================= */
+
+.main-news img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.5s ease;
+}
+
+
+/* IMAGE ZOOM */
+
+.main-news:hover img {
+    transform: scale(1.06);
+}
+
+
+/* =========================================
+   MAIN NEWS OVERLAY
+========================================= */
+
+.main-overlay {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+
+    padding: 35px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(0, 0, 0, 0.9)
+        );
+
+    z-index: 2;
+}
+
+
+/* =========================================
+   TOP STORY TAG
+========================================= */
+
+.tag {
+    display: inline-block;
+
+    background: #c62828;
+    color: white;
+
+    padding: 6px 12px;
+
+    border-radius: 3px;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   MAIN HEADING
+========================================= */
+
+.main-overlay h1 {
+    font-family: Georgia, serif;
+
+    font-size: 36px;
+
+    margin: 12px 0;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================
+   MAIN DESCRIPTION
+========================================= */
+
+.main-overlay p {
+    font-size: 16px;
+
+    line-height: 1.5;
+
+    margin-bottom: 10px;
+}
+
+
+/* =========================================
+   NEWS CARDS
+========================================= */
+
+.news-card {
+    background: rgba(255, 253, 247, 0.95);
+
+    border: 1px solid #ddd6c8;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.12);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* CARD HOVER */
+
+.news-card:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================
+   CARD IMAGE
+========================================= */
+
+.news-card img {
+    width: 100%;
+
+    height: 180px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* =========================================
+   CARD CONTENT
+========================================= */
+
+.news-content {
+    padding: 20px;
+}
+
+
+/* =========================================
+   CATEGORY
+========================================= */
+
+.category {
+    color: #c62828;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   CARD TITLE
+========================================= */
+
+.news-content h2 {
+    font-family: Georgia, serif;
+
+    font-size: 20px;
+
+    margin: 10px 0;
+
+    line-height: 1.3;
+}
+
+
+/* =========================================
+   CARD DESCRIPTION
+========================================= */
+
+.news-content p {
+    color: #666;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================
+   DATE
+========================================= */
+
+.news-content small {
+    color: #888;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    background: #17212b;
+
+    color: #f5f1e8;
+
+    text-align: center;
+
+    padding: 30px;
+
+    margin-top: 45px;
+
+    border-top: 4px solid #c62828;
+}
+
+.footer-content h2 {
+    margin-bottom: 10px;
+}
+
+.footer-content p {
+    margin: 8px 0;
+
+    color: #cbd5e1;
+}
+
+
+/* =========================================
+   TABLET RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .news-container {
+        grid-template-columns:
+            1fr
+            1fr;
+    }
+
+    .main-news {
+        grid-column: span 2;
+    }
+}
+
+
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+
+    /* HEADER */
+
+    header {
+        flex-direction: column;
+
+        gap: 15px;
+
+        padding: 20px;
+    }
+
+
+    /* LOGO */
+
+    .logo {
+        font-size: 25px;
+    }
+
+
+    /* NAVIGATION */
+
+    nav {
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        gap: 12px;
+    }
+
+    nav a {
+        font-size: 13px;
+    }
+
+
+    /* BREAKING NEWS */
+
+    .breaking-news {
+        flex-direction: column;
+
+        gap: 8px;
+
+        text-align: center;
+
+        padding: 12px;
+    }
+
+
+    /* ONE COLUMN */
+
+    .news-container {
+        width: 92%;
+
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+
+    /* MAIN NEWS */
+
+    .main-news {
+        grid-column: span 1;
+
+        height: 350px;
+    }
+
+
+    .main-overlay {
+        padding: 20px;
+    }
+
+
+    .main-overlay h1 {
+        font-size: 26px;
+    }
+
+
+    .main-overlay p {
+        font-size: 14px;
+    }
+
+
+    /* CARD IMAGE */
+
+    .news-card img {
+        height: 200px;
+    }
+
+
+    /* CARD TITLE */
+
+    .news-content h2 {
+        font-size: 19px;
+    }
+}
+
+
